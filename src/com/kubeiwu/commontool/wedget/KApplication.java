@@ -1,6 +1,6 @@
 package com.kubeiwu.commontool.wedget;
 
-import com.kubeiwu.commontool.volley.cache.KVolleyManager;
+import com.kubeiwu.commontool.volley.cache.KRequestQueueManager;
 
 import android.app.Application;
 import android.content.Context;
@@ -29,7 +29,7 @@ public class KApplication extends Application {
 	}
 
 	public void initImageLoder(Context context) {
-		KVolleyManager.getInstance().init(context);
+		KRequestQueueManager.getInstance().init(context);
 
 	}
 

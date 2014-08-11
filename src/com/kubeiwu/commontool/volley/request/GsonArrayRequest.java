@@ -23,7 +23,7 @@ import com.google.gson.reflect.TypeToken;
  */
 public class GsonArrayRequest<T> extends Request<List<T>> {
 	private final Gson gson = new Gson();
-	private final Class<T> clazz;
+	//	private final Class<T> clazz;
 	private final Map<String, String> headers;
 	private final Map<String, String> params;
 	private final Listener<List<T>> listener;
@@ -35,9 +35,9 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonArrayRequest(String url, Class<T> clazz, Map<String, String> headers, Listener<List<T>> listener, ErrorListener errorListener) {
+	public GsonArrayRequest(String url, Map<String, String> headers, Listener<List<T>> listener, ErrorListener errorListener) {
 		super(Method.GET, url, errorListener);
-		this.clazz = clazz;
+		//		this.clazz = clazz;
 		this.headers = headers;
 		this.params = null;
 		this.listener = listener;
@@ -50,10 +50,10 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonArrayRequest(int type, String url, Class<T> clazz, Map<String, String> headers, Map<String, String> params,
-			Listener<List<T>> listener, ErrorListener errorListener) {
+	public GsonArrayRequest(int type, String url, Map<String, String> headers, Map<String, String> params, Listener<List<T>> listener,
+			ErrorListener errorListener) {
 		super(type, url, errorListener);
-		this.clazz = clazz;
+		//		this.clazz = clazz;
 		this.headers = headers;
 		this.params = params;
 		this.listener = listener;
@@ -81,7 +81,8 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 		List<T> list = new ArrayList<T>();
 		try {
 			String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-			list = gson.fromJson(json, new TypeToken<List<T>>() {}.getType());
+			list = gson.fromJson(json, new TypeToken<List<T>>() {
+			}.getType());
 			return Response.success(list, HttpHeaderParser.parseCacheHeaders(response));
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));

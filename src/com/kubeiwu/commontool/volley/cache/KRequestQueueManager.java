@@ -10,18 +10,18 @@ import com.android.volley.toolbox.Volley;
  * @author  cgpllx1@qq.com (www.kubeiwu.com)
  * @date    2014-8-8
  */
-public class KVolleyManager {
+public class KRequestQueueManager {
 	private static RequestQueue mQueue = null;
-	private static KVolleyManager mKVolleyManager;
+	private static KRequestQueueManager mKVolleyManager;
 	private static ImageLoaderManager mImageLoaderManager;
 
-	private KVolleyManager() {
+	private KRequestQueueManager() {
 		//not use 
 	}
 
-	public static KVolleyManager getInstance() {
+	public static KRequestQueueManager getInstance() {
 		if (mKVolleyManager == null) {
-			mKVolleyManager = new KVolleyManager();
+			mKVolleyManager = new KRequestQueueManager();
 		}
 		return mKVolleyManager;
 	}
