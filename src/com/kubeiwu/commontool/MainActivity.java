@@ -9,7 +9,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.kubeiwu.commontool.volley.cache.KVolleyManager;
 import com.kubeiwu.commontool.volley.cache.core.DisplayImageOptions;
-import com.kubeiwu.commontool.volley.request.GsonRequest;
+import com.kubeiwu.commontool.volley.request.GsonObjectRequest;
 
 public class MainActivity extends Activity {
 
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 		}
 		setContentView(listView);
 		String url="http://market.konkacloud.cn/client/recommend?type=4";
-		KVolleyManager.getRequestQueue().add(new GsonRequest<Javabean>(url, Javabean.class, null, listener , errorListener) {
+		KVolleyManager.getRequestQueue().add(new GsonObjectRequest<Javabean>(url, Javabean.class, null, listener , errorListener) {
 		});
 	}
 	Listener<Javabean> listener=new Listener<Javabean>() {
