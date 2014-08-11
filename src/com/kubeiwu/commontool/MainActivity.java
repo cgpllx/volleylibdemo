@@ -11,8 +11,8 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.kubeiwu.commontool.volley.cache.KRequestQueueManager;
 import com.kubeiwu.commontool.volley.cache.core.DisplayImageOptions;
-import com.kubeiwu.commontool.volley.request.GsonArrayRequest;
-import com.kubeiwu.commontool.volley.request.GsonObjectRequest;
+import com.kubeiwu.commontool.volley.request.KGsonArrayRequest;
+import com.kubeiwu.commontool.volley.request.KGsonObjectRequest;
 
 public class MainActivity extends Activity {
 
@@ -62,8 +62,8 @@ public class MainActivity extends Activity {
 		}
 		setContentView(listView);
 		String url = "http://market.konkacloud.cn/client/recommend?type=4";
-		KRequestQueueManager.getRequestQueue().add(new GsonObjectRequest<Javabean>(url, null, listener, errorListener));
-		KRequestQueueManager.getRequestQueue().add(new GsonArrayRequest<Javabean>(url, null, gsonArraylistener, errorListener));
+		KRequestQueueManager.getRequestQueue().add(new KGsonObjectRequest<Javabean>(url, null, listener, errorListener));
+		KRequestQueueManager.getRequestQueue().add(new KGsonArrayRequest<Javabean>(url, null, gsonArraylistener, errorListener));
 	}
 
 	Listener<Javabean> listener = new Listener<Javabean>() {

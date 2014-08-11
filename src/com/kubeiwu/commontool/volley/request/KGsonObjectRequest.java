@@ -20,9 +20,9 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Volley adapter for JSON requests that will be parsed into Java objects by Gson.
  */
-public class GsonObjectRequest<T> extends Request<T> {
+public class KGsonObjectRequest<T> extends Request<T> {
 	private final Gson gson = new Gson();
-//	private final Class<T> clazz;
+	//	private final Class<T> clazz;
 	private final Map<String, String> headers;
 	private final Map<String, String> params;
 	private final Listener<T> listener;
@@ -34,12 +34,8 @@ public class GsonObjectRequest<T> extends Request<T> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonObjectRequest(String url , Map<String, String> headers, Listener<T> listener, ErrorListener errorListener) {
-		super(Method.GET, url, errorListener);
-//		this.clazz = clazz;
-		this.headers = headers;
-		this.params = null;
-		this.listener = listener;
+	public KGsonObjectRequest(String url, Map<String, String> headers, Listener<T> listener, ErrorListener errorListener) {
+		this(Method.GET, url, headers, headers, listener, errorListener);
 	}
 
 	/**
@@ -49,10 +45,10 @@ public class GsonObjectRequest<T> extends Request<T> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonObjectRequest(int type, String url , Map<String, String> headers, Map<String, String> params, Listener<T> listener,
+	public KGsonObjectRequest(int type, String url, Map<String, String> headers, Map<String, String> params, Listener<T> listener,
 			ErrorListener errorListener) {
 		super(type, url, errorListener);
-//		this.clazz = clazz;
+		//		this.clazz = clazz;
 		this.headers = headers;
 		this.params = params;
 		this.listener = listener;

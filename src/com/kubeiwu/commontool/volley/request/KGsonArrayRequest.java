@@ -1,7 +1,6 @@
 package com.kubeiwu.commontool.volley.request;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +20,8 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Volley adapter for JSON requests that will be parsed into Java objects by Gson.
  */
-public class GsonArrayRequest<T> extends Request<List<T>> {
+public class KGsonArrayRequest<T> extends Request<List<T>> {
 	private final Gson gson = new Gson();
-	//	private final Class<T> clazz;
 	private final Map<String, String> headers;
 	private final Map<String, String> params;
 	private final Listener<List<T>> listener;
@@ -35,12 +33,8 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonArrayRequest(String url, Map<String, String> headers, Listener<List<T>> listener, ErrorListener errorListener) {
-		super(Method.GET, url, errorListener);
-		//		this.clazz = clazz;
-		this.headers = headers;
-		this.params = null;
-		this.listener = listener;
+	public KGsonArrayRequest(String url, Map<String, String> headers, Listener<List<T>> listener, ErrorListener errorListener) {
+		this(Method.GET, url, headers, headers, listener, errorListener);
 	}
 
 	/**
@@ -50,10 +44,9 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonArrayRequest(int type, String url, Map<String, String> headers, Map<String, String> params, Listener<List<T>> listener,
+	public KGsonArrayRequest(int type, String url, Map<String, String> headers, Map<String, String> params, Listener<List<T>> listener,
 			ErrorListener errorListener) {
 		super(type, url, errorListener);
-		//		this.clazz = clazz;
 		this.headers = headers;
 		this.params = params;
 		this.listener = listener;
@@ -90,19 +83,5 @@ public class GsonArrayRequest<T> extends Request<List<T>> {
 			return Response.error(new ParseError(e));
 		}
 	}
-
-	//	@Override
-	//	protected Response<T> parseNetworkResponse(NetworkResponse response) {
-	//		try {
-	//			String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-	//			Type t = new TypeToken<List<T>>() {
-	//			}.getType();
-	//			return Response.success(gson.fromJson(json, t), HttpHeaderParser.parseCacheHeaders(response));
-	//		} catch (UnsupportedEncodingException e) {
-	//			return Response.error(new ParseError(e));
-	//		} catch (JsonSyntaxException e) {
-	//			return Response.error(new ParseError(e));
-	//		}
-	//	}
 
 }
