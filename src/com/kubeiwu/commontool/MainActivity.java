@@ -3,6 +3,9 @@ package com.kubeiwu.commontool;
 import java.io.File;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -19,7 +22,7 @@ import com.kubeiwu.commontool.volley.request.SimpleMultiPartRequest;
 import com.kubeiwu.commontool.volley.request.params.MultipartRequestParams;
 
 public class MainActivity extends Activity {
-
+//	https://github.com/cgpllx/volleylibdemo.git
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,12 +74,21 @@ public class MainActivity extends Activity {
 //		KRequestQueueManager.getRequestQueue().add(new SimpleMultiPartRequest(url, new Listener<String>() {
 //			@Override
 //			public void onResponse(String response) {
-//				
 //			}
 //		}, null).addFile("ces", Environment.getExternalStorageDirectory().list()[0]) );
 		MultipartRequestParams params=new MultipartRequestParams();
 		params.put("file", new File(""));
 		KRequestQueueManager.getRequestQueue().add(new SimpleMultiPartRequest(url, params));
+		
+		JSONObject jsonObject=new JSONObject();
+		try {
+			jsonObject.put("id", 1);
+			jsonObject.put("name", "zhangshan");
+			jsonObject.put("tel",13437402514l);
+			System.out.println("测试的数据="+jsonObject.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 	Listener<Javabean> listener = new Listener<Javabean>() {

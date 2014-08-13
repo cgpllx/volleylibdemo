@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -17,56 +15,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-/**
- * Volley adapter for JSON requests that will be parsed into Java objects by Gson.
- */
-public class KGsonArrayRequest<T> extends Request<List<T>> {
+public class KGsonArrayRequest<T> extends KRequest<List<T>> {
 	private final Gson gson = new Gson();
-	private final Map<String, String> headers;
-	private final Map<String, String> params;
-	private final Listener<List<T>> listener;
 
-	/**
-	 * Make a GET request and return a parsed object from JSON.
-	 *
-	 * @param url URL of the request to make
-	 * @param clazz Relevant class object, for Gson's reflection
-	 * @param headers Map of request headers
-	 */
 	public KGsonArrayRequest(String url, Map<String, String> headers, Listener<List<T>> listener, ErrorListener errorListener) {
 		this(Method.GET, url, headers, headers, listener, errorListener);
 	}
 
-	/**
-	 * Make a request and return a parsed object from JSON.
-	 *
-	 * @param url URL of the request to make
-	 * @param clazz Relevant class object, for Gson's reflection
-	 * @param headers Map of request headers
-	 */
-	public KGsonArrayRequest(int type, String url, Map<String, String> headers, Map<String, String> params, Listener<List<T>> listener,
+	public KGsonArrayRequest(int method, String url, Map<String, String> headers, Map<String, String> params, Listener<List<T>> listener,
 			ErrorListener errorListener) {
-		super(type, url, errorListener);
-		this.headers = headers;
-		this.params = params;
-		this.listener = listener;
-	}
-
-	@Override
-	public Map<String, String> getHeaders() throws AuthFailureError {
-		return headers != null ? headers : super.getHeaders();
-	}
-
-	@Override
-	protected Map<String, String> getParams() throws AuthFailureError {
-		return params != null ? params : super.getParams();
-	}
-
-	@Override
-	protected void deliverResponse(List<T> response) {
-		if (null != listener) {
-			listener.onResponse(response);
-		}
+		super(method, url, headers, params, listener, errorListener);
 	}
 
 	@Override
