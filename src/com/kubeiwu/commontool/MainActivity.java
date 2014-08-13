@@ -1,5 +1,6 @@
 package com.kubeiwu.commontool;
 
+import java.io.File;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,6 +14,9 @@ import com.kubeiwu.commontool.volley.cache.KRequestQueueManager;
 import com.kubeiwu.commontool.volley.cache.core.DisplayImageOptions;
 import com.kubeiwu.commontool.volley.request.KGsonArrayRequest;
 import com.kubeiwu.commontool.volley.request.KGsonObjectRequest;
+import com.kubeiwu.commontool.volley.request.MultiPartRequest;
+import com.kubeiwu.commontool.volley.request.SimpleMultiPartRequest;
+import com.kubeiwu.commontool.volley.request.params.MultipartRequestParams;
 
 public class MainActivity extends Activity {
 
@@ -64,6 +68,15 @@ public class MainActivity extends Activity {
 		String url = "http://market.konkacloud.cn/client/recommend?type=4";
 		KRequestQueueManager.getRequestQueue().add(new KGsonObjectRequest<Javabean>(url, null, listener, errorListener));
 		KRequestQueueManager.getRequestQueue().add(new KGsonArrayRequest<Javabean>(url, null, gsonArraylistener, errorListener));
+//		KRequestQueueManager.getRequestQueue().add(new SimpleMultiPartRequest(url, new Listener<String>() {
+//			@Override
+//			public void onResponse(String response) {
+//				
+//			}
+//		}, null).addFile("ces", Environment.getExternalStorageDirectory().list()[0]) );
+		MultipartRequestParams params=new MultipartRequestParams();
+		params.put("file", new File(""));
+		KRequestQueueManager.getRequestQueue().add(new SimpleMultiPartRequest(url, params));
 	}
 
 	Listener<Javabean> listener = new Listener<Javabean>() {

@@ -1,8 +1,6 @@
 package com.kubeiwu.commontool.volley.request;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Map;
 
 import com.android.volley.AuthFailureError;
